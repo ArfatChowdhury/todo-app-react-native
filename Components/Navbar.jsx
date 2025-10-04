@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Navbar = () => {
+    const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <Text style={styles.title}>To Do List</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('Settings') }>
       <Ionicons name='settings-outline' size={30} color='black' />
+      </TouchableOpacity>
     </View>
   )
 }
