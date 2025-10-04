@@ -11,7 +11,7 @@ const Searchbar = () => {
         <View style={[styles.container, {backgroundColor: colors.searchBackground, borderColor: colors.searchBorder}]}>
             <Ionicons name='search' size={28} color={colors.textSecondary} />
             <TextInput
-            placeholder='Search your items'
+            placeholder='Search your task'
             placeholderTextColor={colors.searchPlaceholder}
             style={[styles.searchbarInput, {color: colors.searchText}]}
             />
