@@ -1,32 +1,76 @@
-import { createContext, useState } from "react";
-
-
+import { createContext, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Context = createContext()
 
-export ContextProvider = ({children}) =>{
+export const ContextProvider = ({ children }) => {
 
     const [tasks, setTasks] = useState([])
     const [initial, setInitial] = useState('')
     const [searchQuery, setSearchQuery] = useState('')
 
     const filteredTask = tasks.filter(task => task.task.toLowerCase().includes(searchQuery.toLowerCase()))
-    
-    const handleAddTask () =>{
 
-        const newTask ={
-            id: Date.now(),
-            task: initial ,
-            isDone: false
+    const handleAddTask = async () => {
+        if (initial.trim() === '') return
+        try {
+            const newTask = {
+                id: Date.now(),
+                task: initial,
+                isDone: false
+            }
+            const updatedTasks = [...tasks, newTask]
+            setTasks(updatedTasks)
+            setInitial('')
+            await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks))
+        } catch (err) {
+            console.log(err);
+
         }
-        const updatedTasks = [...tasks, newTask]
-        
+    }
+    useEffect(() => {
+        const getTodoTask = async () => {
+            try {
+                const todos = await AsyncStorage.getItem('tasks')
+                if (todos !== null) {
+                    setTasks(JSON.parse(todos))
+                }
+            } catch (err) {
+                console.log(err);
+
+            }
+        }
+        getTodoTask()
+    }
+        , [])
+
+    const deleteTask = async (taskId) => {
+        try {
+            const updatedTasks = tasks.filter(task => task.id !== taskId )
+            setTasks(updatedTasks)
+            await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks))
+
+        } catch (err) {
+            console.log(err);
+
+        }
     }
 
-const value = null
-    return(
+    const value = {
+tasks,
+setTasks,
+searchQuery,
+setSearchQuery,
+initial,
+setInitial,
+filteredTask,
+handleAddTask,
+deleteTask
+    }
+
+    return (
         <Context.Provider value={value} >
-        {children}
+            {children}
         </Context.Provider>
     )
 }
