@@ -3,9 +3,19 @@ import React, { useContext } from 'react'
 import { ThemeContext } from '../src/ThemeContext'
 import { Colors } from '../src/Colors'
 import { Ionicons } from '@expo/vector-icons'
+import { Context } from '../src/Context'
 
 const AddTodo = () => {
     const { theme } = useContext(ThemeContext)
+    const {tasks,
+        setTasks,
+        searchQuery,
+        setSearchQuery,
+        initial,
+        setInitial,
+        filteredTask,
+        handleAddTask,
+        deleteTask} = useContext(Context)
     const colors = theme === 'dark' ? Colors.dark : Colors.light
 
     return (
@@ -17,15 +27,16 @@ const AddTodo = () => {
                <View style={[styles.inputCon, {backgroundColor: colors.searchBackground,  borderColor: colors.searchBorder,}]}>
                <TextInput
                     placeholder='Enter your new task'
+                    value={initial}
+                    onChangeText={setInitial}
                     placeholderTextColor={colors.searchPlaceholder}
                     style={[styles.inputText, {
                         backgroundColor: colors.searchBackground,
-                       
                         color: colors.searchText
                     }]}
                 />
                </View>
-                <TouchableOpacity style={[styles.addButton, { backgroundColor: colors.button }]}>
+                <TouchableOpacity onPress={handleAddTask} style={[styles.addButton, { backgroundColor: colors.button }]}>
                     <Ionicons name='add' size={25} color='white' />
                 </TouchableOpacity>
             </View>

@@ -3,17 +3,22 @@ import React, { useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ThemeContext } from '../src/ThemeContext';
 import { Colors } from '../src/Colors';
+import { Context } from '../src/Context';
 
 const Searchbar = () => {
-    const {theme} = useContext(ThemeContext)
-    const colors =  theme === 'dark' ? Colors.dark : Colors.light
+    const { theme } = useContext(ThemeContext)
+    const {searchQuery, setSearchQuery} =  useContext(Context)
+    
+    const colors = theme === 'dark' ? Colors.dark : Colors.light
     return (
-        <View style={[styles.container, {backgroundColor: colors.searchBackground, borderColor: colors.searchBorder}]}>
+        <View style={[styles.container, { backgroundColor: colors.searchBackground, borderColor: colors.searchBorder }]}>
             <Ionicons name='search' size={28} color={colors.textSecondary} />
             <TextInput
-            placeholder='Search your task'
-            placeholderTextColor={colors.searchPlaceholder}
-            style={[styles.searchbarInput, {color: colors.searchText}]}
+                placeholder='Search your task'
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                placeholderTextColor={colors.searchPlaceholder}
+                style={[styles.searchbarInput, { color: colors.searchText }]}
             />
         </View>
     )
@@ -27,13 +32,13 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 6,
-        flexDirection:'row',
-        gap:10,
-        alignItems:'center'
+        flexDirection: 'row',
+        gap: 10,
+        alignItems: 'center'
     },
-    searchbarInput:{
-        fontSize:16,
-        flex:1
+    searchbarInput: {
+        fontSize: 16,
+        flex: 1
     }
 
 })

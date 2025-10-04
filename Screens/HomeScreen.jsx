@@ -3,6 +3,7 @@ import React from 'react'
 import Navbar from '../Components/Navbar'
 import Searchbar from '../Components/Searchbar'
 import AddTodo from '../Components/AddTodo'
+import RenderTodo from '../Components/RenderTodo'
 
 
 const HomeScreen = () => {
@@ -10,6 +11,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <Navbar></Navbar>
       <Searchbar></Searchbar>
+      <RenderTodo></RenderTodo>
       <AddTodo/>
     </View>
   )

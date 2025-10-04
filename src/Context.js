@@ -46,7 +46,7 @@ export const ContextProvider = ({ children }) => {
 
     const deleteTask = async (taskId) => {
         try {
-            const updatedTasks = tasks.filter(task => task.id !== taskId )
+            const updatedTasks = tasks.filter(task => task.id !== taskId)
             setTasks(updatedTasks)
             await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks))
 
@@ -57,15 +57,15 @@ export const ContextProvider = ({ children }) => {
     }
 
     const value = {
-tasks,
-setTasks,
-searchQuery,
-setSearchQuery,
-initial,
-setInitial,
-filteredTask,
-handleAddTask,
-deleteTask
+        tasks,
+        setTasks,
+        searchQuery,
+        setSearchQuery,
+        initial,
+        setInitial,
+        filteredTask,
+        handleAddTask,
+        deleteTask
     }
 
     return (
