@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Navbar from '../Components/Navbar'
 import Searchbar from '../Components/Searchbar'
@@ -9,10 +9,18 @@ import RenderTodo from '../Components/RenderTodo'
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Navbar></Navbar>
-      <Searchbar></Searchbar>
-      <RenderTodo></RenderTodo>
-      <AddTodo/>
+      <View style={styles.content}>
+        <Navbar></Navbar>
+        <Searchbar></Searchbar>
+        <RenderTodo></RenderTodo>
+      </View>
+      <KeyboardAvoidingView  
+        style={styles.bottomSection} 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'android' ? 20 : 0}
+      >
+          <AddTodo />
+      </KeyboardAvoidingView>
     </View>
   )
 }
@@ -20,9 +28,16 @@ const HomeScreen = () => {
 export default HomeScreen
 
 const styles = StyleSheet.create({
-container:{
+  container: {
     paddingTop: '10%',
-    paddingHorizontal:'4%',
-    flex:1
-}
+    paddingHorizontal: '4%',
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  content: {
+    flex: 1
+  },
+  bottomSection: {
+    marginBottom: 40
+  }
 })
