@@ -16,7 +16,8 @@ const RenderTodo = () => {
         setInitial,
         filteredTask,
         handleAddTask,
-        deleteTask } = useContext(Context)
+        deleteTask ,
+    handleIsDone} = useContext(Context)
     const colors = theme === 'dark' ? Colors.dark : Colors.light
     return (
         <View style={styles.flatListContainer}>
@@ -32,14 +33,15 @@ const RenderTodo = () => {
                     }]}>
                         <View style={styles.textCon}>
                             <Checkbox 
-                                value={item.completed || false}
+                            onValueChange={()=> handleIsDone(item.id)}
+                                value={item.isDone}
                                 color={colors.primary}
                                 style={styles.checkbox}
                             />
                             <Text style={[styles.text, {
                                 color: colors.text,
-                                textDecorationLine: item.completed ? 'line-through' : 'none',
-                                opacity: item.completed ? 0.6 : 1
+                                textDecorationLine: item.isDone ? 'line-through' : 'none',
+                                opacity: item.isDone ? 0.6 : 1
                             }]}>{item.task}</Text>
                         </View>
                         <TouchableOpacity 

@@ -11,6 +11,21 @@ export const ContextProvider = ({ children }) => {
 
     const filteredTask = tasks.filter(task => task.task.toLowerCase().includes(searchQuery.toLowerCase()))
 
+    const handleIsDone = async (id) => {
+        try {
+            const newTodos = tasks.map((item) => {
+                if (item.id === id) {
+                    item.isDone = !item.isDone
+                }
+                return item
+            })
+            await AsyncStorage.setItem('tasks', JSON.stringify(newTodos))
+            setTasks(newTodos)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
     const handleAddTask = async () => {
         if (initial.trim() === '') return
         try {
@@ -65,7 +80,8 @@ export const ContextProvider = ({ children }) => {
         setInitial,
         filteredTask,
         handleAddTask,
-        deleteTask
+        deleteTask,
+        handleIsDone
     }
 
     return (
