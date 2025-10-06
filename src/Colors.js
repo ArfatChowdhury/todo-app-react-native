@@ -5,7 +5,7 @@ export const Colors = {
     primaryDark: '#0056CC',    // Darker blue for pressed states
     
     // Background colors
-    background: '#FFFFFF',     // Pure white
+    background: '#f9f9f9',     // Pure white
     backgroundSecondary: '#F8F9FA', // Light gray background
     surface: '#FFFFFF',        // Card/surface background
     

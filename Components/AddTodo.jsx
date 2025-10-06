@@ -45,20 +45,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         flex: 1,
         borderWidth: 1,
-        borderRadius: 15,
+        borderRadius: 10,
         paddingHorizontal: 15,
         paddingVertical: 12,
         marginRight: 10,
     },
     addButton: {
         borderRadius: 10,
-        padding: 10
+        padding: 12
     },
     addContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 16,
+        // paddingHorizontal: 12,
         paddingVertical: 15,
     }
 })
