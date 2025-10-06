@@ -8,20 +8,20 @@ import RenderTodo from '../Components/RenderTodo'
 
 const HomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
+    >
       <View style={styles.content}>
         <Navbar></Navbar>
         <Searchbar></Searchbar>
         <RenderTodo></RenderTodo>
       </View>
-      <KeyboardAvoidingView  
-        style={styles.bottomSection} 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'android' ? 20 : 0}
-      >
-          <AddTodo />
-      </KeyboardAvoidingView>
-    </View>
+      <View style={styles.bottomSection}>
+        <AddTodo />
+      </View>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
     paddingTop: '10%',
     paddingHorizontal: '4%',
     flex: 1,
-    justifyContent: 'space-between'
   },
   content: {
     flex: 1
