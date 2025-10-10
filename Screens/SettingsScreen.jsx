@@ -6,7 +6,7 @@ import { Colors } from '../src/Colors'
 import { useNavigation } from '@react-navigation/native'
 
 const SettingsScreen = () => {
-  const { theme, setTheme, toggleTheme } = useContext(ThemeContext)
+  const { theme, setTheme, toggleTheme, mode, setSystemTheme, setMode } = useContext(ThemeContext)
   const colors = theme === 'dark' ? Colors.dark : Colors.light
   const navigation = useNavigation()
   return (
@@ -40,25 +40,27 @@ const SettingsScreen = () => {
                   <Ionicons name='bulb-outline' size={24} color={colors.icon} />
                   <Text style={[styles.themeText, { color: colors.text }]}>Light Mode</Text>
                 </View>
-                <Ionicons name={theme === 'light' ? 'radio-button-on' : 'radio-button-off'} size={24} color={colors.icon} />
+                <Ionicons name={theme === 'light' && mode === 'user' ? 'radio-button-on' : 'radio-button-off'} size={24} color={colors.icon} />
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={toggleTheme}>
-            <View style={[styles.settingBtnCon, { backgroundColor: colors.surface }]}>
-              <View style={styles.settingCon}>
-                <Ionicons name='moon' size={24} color={colors.icon} />
-                <Text style={[styles.themeText, { color: colors.text }]}>Dark Mode</Text>
+              <View style={[styles.settingBtnCon, { backgroundColor: colors.surface }]}>
+                <View style={styles.settingCon}>
+                  <Ionicons name='moon' size={24} color={colors.icon} />
+                  <Text style={[styles.themeText, { color: colors.text }]}>Dark Mode</Text>
+                </View>
+                <Ionicons name={theme === 'dark' && mode === 'user' ? 'radio-button-on' : 'radio-button-off'} size={24} color={colors.icon} />
               </View>
-              <Ionicons name={theme === 'dark' ? 'radio-button-on' : 'radio-button-off'} size={24} color={colors.icon} />
-            </View>
             </TouchableOpacity>
-            <View style={[styles.settingBtnCon, { backgroundColor: colors.surface }]}>
-              <View style={styles.settingCon}>
-                <MaterialCommunityIcons name="lightbulb-auto-outline" size={24} color={colors.icon} />
-                <Text style={[styles.themeText, { color: colors.text }]}>System</Text>
+            <TouchableOpacity onPress={setSystemTheme}>
+              <View style={[styles.settingBtnCon, { backgroundColor: colors.surface }]}>
+                <View style={styles.settingCon}>
+                  <MaterialCommunityIcons name="lightbulb-auto-outline" size={24} color={colors.icon} />
+                  <Text style={[styles.themeText, { color: colors.text }]}>System</Text>
+                </View>
+                <Ionicons name={mode === 'system' ? 'radio-button-on' : 'radio-button-off'} size={24} color={colors.icon} />
               </View>
-              <Ionicons name='radio-button-off' size={24} color={colors.icon} />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
